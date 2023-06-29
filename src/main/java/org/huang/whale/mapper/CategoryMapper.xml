@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.huang.whale.mapper.CategoryMapper">
+    <select id="getAllCategories" resultType="org.huang.whale.bean.Category">
+        SELECT *
+        FROM category
+    </select>
+
+    <delete id="deleteCategoryByIds">
+        DELETE FROM category WHERE id IN
+        <foreach collection="ids" separator="," item="id" open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="updateCategoryByid" parameterType="org.huang.whale.bean.Category">
+        UPDATE category
+        SET cateName = #{cateName}
+        WHERE id = #{id}
+    </update>
+
+    <insert id="addCategory" parameterType="org.huang.whale.bean.Category">
+        INSERT INTO category
+        SET date = #{date}, cateName = #{cateName}
+    </insert>
+</mapper>
